@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>Foto browser HAN Intro</title>
+		<script src="IntroPhotos.jsonp"></script>
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.1/css/lightbox.css"/>
+		<style>
+			.photo {
+				padding: 10px;
+				background: white;
+				position: relative;
+				margin: 5px;
+				border: 1px solid #999;
+				border-radius: 4px;
+			}
+			.photo img {
+				max-width: 200px;
+				max-height: 150px;
+				border-radius: 4px;
+			}
+			button {
+				background: white;
+				border: 1px solid #999;
+				padding: 10px;
+				border-radius: 4px;
+				font-size: 14pt;
+				margin: 5px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			$(function() {
+				$.each(introPhotos, function(p, photo) {
+					teams = []
+					for( t in photo.teams ) {
+						teams.push( photo.teams[t].replace(" ", "_") )
+					}
+					$(".isotope").append("<div class='photo' data-teams='team "+ teams.join(" ")+"'> <a data-lightbox='images' href='introPhotos/" + photo.image + "'> <img src='introPhotos/thumbs/" + photo.image.replace("JPG","jpg") + "'></a></div>")
+				});
+				
+				$(".isotope").imagesLoaded( function() {
+					  $(".isotope").isotope({
+						itemSelector: '.photo',
+						layoutMode: 'fitRows'		
+					});
+					
+					$.getScript("https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.1/js/lightbox.js")
+				});
+				
+				$("button").click(function() {
+					f = ".photo[data-teams~='"+$(this).data("team")+"']"
+					console.log($(this).data("team"), f)
+					$(".isotope").isotope({ filter: f });
+				});
+				
+			});
+			
+		</script>
+		
+		<button data-team="team">Alles</button>
+		<button data-team="Reactievat/Team_Zwart">Reactievat/Team Zwart</button>
+		<button data-team="Team_Wit/Grijs">Team Wit/Grijs</button>
+		<button data-team="Team_Groen">Team Groen</button>
+		<button data-team="Team_Turquoise">Team Turquoise</button>
+		<button data-team="Team_Blauw">Team Blauw</button>
+		<button data-team="Team_Roze">Team Roze</button>
+		<button data-team="Team_Geel">Team Geel</button>
+		<button data-team="Team_Oranje">Team Oranje</button>
+		<button data-team="Team_Paars/Violet">Team Paars/Violet</button>
+		<button data-team="Team_lichtgroen">Team lichtgroen</button>
+		<button data-team="Team_Rood">Team Rood</button>
+		<div class="isotope">
+		
+		</div>
+	</body>
+</html>

@@ -16,7 +16,7 @@
 				border: 1px solid #999;
 				border-radius: 4px;
 				max-width: 200px;
-				opacity: 0.5;
+				display: inline-block;
 			}
 			.photo img {
 				max-width: 200px;
@@ -42,7 +42,7 @@
 					for( t in photo.teams ) {
 						teams.push( photo.teams[t].replace(" ", "_") )
 					}
-					$(".isotope").append("<div class='photo' data-teams='team "+ teams.join(" ")+"'> <a data-lightbox='images' href='introPhotos/" + photo.image + "'> <img src='introPhotos/thumbs/" + photo.image.replace("JPG","jpg") + "'></a></div>")
+					$(".isotope").append("<div class='photo' style='opacity:0.5;' data-teams='team "+ teams.join(" ")+"'> <a data-lightbox='images' href='introPhotos/" + photo.image + "'> <img src='introPhotos/thumbs/" + photo.image.replace("JPG","jpg") + "'></a></div>")
 				});
 				
 				$(".isotope").imagesLoaded( function() {
